@@ -5,6 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -18,8 +19,12 @@ class User(db.Model):
 
 db.create_all()
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['GET'])
 def index():
+    return render_template('index.html')
+    
+@app.route('/usermanagement/', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def user_mamagement():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -32,7 +37,7 @@ def index():
             return "There was an issue adding the user"
     else:
         users = User.query.order_by(User.date_created).all()
-        return render_template('index.html', users=users)
+        return render_template('usermanagement.html', users=users)
 
 if __name__ == "__main__":
     app.run(debug=True)
