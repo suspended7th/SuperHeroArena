@@ -7,6 +7,8 @@ setup(
     install_requires=[
         'flask',
         'flask_sqlalchemy',
-        'passlib'
+        'passlib',
+        'pytest',
+        'coverage'
     ],
 )
