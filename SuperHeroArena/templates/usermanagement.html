@@ -14,6 +14,8 @@
 				<th>User Name</th>
 				<th>Password</th>
 				<th>Date Created</th>
+				<th></th>
+				<th></th>
 			</tr>
 			{% for user in users %}
 				<tr>
@@ -21,11 +23,21 @@
 					<td>{{ user.username }}</td>
 					<td>{{ user.password }}</td>
 					<td>{{ user.date_created.date() }}</td>
+					<td>
+						<form action="/usermanagement/{{ user.id }}/" method="GET">
+							<input type="submit" value="Edit">
+						</form>
+					</td>
+					<td>
+						<form action="/usermanagement/{{ user.id }}/delete" method="GET">
+							<input type="submit" value="Delete">
+						</form>
+					</td>
 				</tr>
 			{% endfor %}
 		</table>
 		
-		<form action="/" method="POST">
+		<form action="/usermanagement/" method="POST">
 			<table>
 				<tr>
 					<td>Username:</td>
