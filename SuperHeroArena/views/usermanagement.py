@@ -55,4 +55,11 @@ def userdeleter(id):
             return render_template('userdeleter.html', user=user)
         else:
             abort(404)
-        
+
+@app.route('/usermanagement/<id>/login/', methods=['POST'])
+def userlogin(id):
+    user = User.query.filter(User.id==id).first()
+    if user.authenticate(request.form['password']):
+        return "Successful login"
+    else:
+        return "Unauthenticated"

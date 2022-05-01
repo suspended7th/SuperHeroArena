@@ -34,7 +34,8 @@
 					<td><input type="text" name="password", id="password", value="{{ user.password }}"></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td><input type="submit" value="Test Login" 
+							   formaction="/usermanagement/{{ user.id }}/login/"></td>
 					<td><input type="submit" value="Update User"></td>
 				</tr>
 			</table>
