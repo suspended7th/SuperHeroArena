@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Users</title>
+{% endblock %}
+
+{% block body %}
+	<div class="content">
+		<h1>Users</h1>
+		
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>User Name</th>
+				<th>Password</th>
+				<th>Date Created</th>
+				<th></th>
+				<th></th>
+			</tr>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.username }}</td>
+					<td>{{ user.password }}</td>
+					<td>{{ user.date_created.date() }}</td>
+					<td>
+						<form action="/usermanagement/{{ user.id }}/" method="GET">
+							<input type="submit" value="Edit">
+						</form>
+					</td>
+					<td>
+						<form action="/usermanagement/{{ user.id }}/delete" method="GET">
+							<input type="submit" value="Delete">
+						</form>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+		
+		<form action="/usermanagement/" method="POST">
+			<table>
+				<tr>
+					<td>Username:</td>
+					<td><input type="text" name="username", id="username"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="text" name="password", id="password"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Add User"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+{% endblock %}
