@@ -1,19 +1,38 @@
-from flask import render_template, redirect, request
-from datetime import datetime
-
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy        
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import os
+       
+db = SQLAlchemy()
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-from .model import User
-
-db.create_all()
-
-from .view import index, usermanagement
+def create_app(test_config=None):
+    app = Flask(__name__)
+    app.config.from_mapping(
+        SQLALCHEMY_DATABASE_URI='sqlite:///main.db',
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        SECRET_KEY='dev'
+    )
+    
+    if test_config is None:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_mapping(test_config)
+        
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
+    
+    from . import dbconfig
+    app.app_context().push()
+    dbconfig.init_db()
+    
+    from .views import usermanagement
+    
+    app.register_blueprint(usermanagement.bp)
+    
+    return app
 
 if __name__ == "__main__":
+    app = create_app()
     app.run(debug=True)
