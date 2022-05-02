@@ -14,4 +14,5 @@ export FLASK_APP=SuperHeroArena
 export FLASK_ENV=development
 
 # Run the Flask application
-flask test 
+python3 -m coverage run -m pytest SuperHeroArena/tests/
+python3 -m coverage html

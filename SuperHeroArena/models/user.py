@@ -1,6 +1,7 @@
 from ..dbconfig import get_db
 from datetime import datetime
 from passlib.hash import bcrypt
+from sqlalchemy.exc import IntegrityError
 
 hasher = bcrypt.using(rounds=12)
 
@@ -13,8 +14,10 @@ class User(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     
     def __init__(self, username, password=None, date_created=None):
+        if not username:
+            raise IntegrityError('Username cannot be null', None, None)
         db.Model.__init__(self, username=username, date_created=date_created)
-        self.password = self.set_password(password)
+        self.set_password(password)
         
     def set_password(self, password):
         self.password = hasher.hash(password)
