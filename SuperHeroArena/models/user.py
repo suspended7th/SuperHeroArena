@@ -2,26 +2,28 @@ from ..dbconfig import get_db
 from datetime import datetime
 from passlib.hash import bcrypt
 from sqlalchemy.exc import IntegrityError
+from flask_login import UserMixin
 
 hasher = bcrypt.using(rounds=12)
 
 db = get_db()
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(), nullable=False)
-    password = db.Column(db.String())
+    username = db.Column(db.String(), nullable=False, unique=True)
+    email = db.Column(db.String(), nullable=False, unique=True)
+    password = db.Column(db.String(), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     
-    def __init__(self, username, password=None, date_created=None):
-        if not username:
-            raise IntegrityError('Username cannot be null', None, None)
-        db.Model.__init__(self, username=username, date_created=date_created)
+    def __init__(self, username, email, password=None, date_created=None):
+        db.Model.__init__(self, username=username, email=email, date_created=date_created)
         self.set_password(password)
         
     def set_password(self, password):
-        self.password = hasher.hash(password)
-
+        if password:
+            self.password = hasher.hash(password)
+        else:
+            self.password = None
     
     def __repr__(self):
         return '<User {}>'.format(self.username)

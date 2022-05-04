@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>SHA Login</title>
+{% endblock %}
+
+{% block body %}
+	<h1>Login</h1>
+	
+	{% include "flash.html" %}
+	
+	<form action="/login/" method="POST">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td><input type="text" name="username" id="username" value=""></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password" id="password" value=""></td>
+			</tr>
+			<tr>
+				<td>Remember me</td>
+				<td><input type="checkbox" name="remember"></td>
+			</tr>
+			<tr>
+				<td><a type="button" href="{{ url_for('auth.signup') }}">Sign Up</a></td>
+				<td><input type="submit" value="Login"></td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>SHA Signup</title>
+{% endblock %}
+
+{% block body %}
+	<h1>Signup</h1>
+	
+	{% include "flash.html" %}
+	
+	<form action="/signup/" method="POST">
+		<table>
+			<tr>
+				<td>Username</td>
+				<td><input type="text" name="username" id="username" value=""></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password" id="password" value=""></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="email" name="email" id="email" value=""></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Sign Up"></td>
+			</tr>
+		</table>
+	</form>
+{% endblock %}
