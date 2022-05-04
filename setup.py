@@ -8,7 +8,6 @@ setup(
         'flask',
         'flask_sqlalchemy',
         'passlib',
-        'pytest',
-        'coverage'
+        'flask_login'
     ],
 )

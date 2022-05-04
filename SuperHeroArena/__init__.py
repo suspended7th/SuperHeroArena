@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
@@ -27,9 +28,19 @@ def create_app(test_config=None):
     app.app_context().push()
     dbconfig.init_db()
     
-    from .views import usermanagement
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
     
-    app.register_blueprint(usermanagement.bp)
+    from .models.user import User
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+    
+    from .views import auth
+    
+    app.register_blueprint(auth.bp)
     
     return app
 
