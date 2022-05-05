@@ -1,5 +1,6 @@
 from flask import abort, Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_nav.elements import View
 import json, requests, os, re
 
 bp = Blueprint('shapi', __name__, url_prefix='/supers')
@@ -69,3 +70,8 @@ def search():
         elif 'villains' in request.args:
             super_hero = call_superhero_api({}, 'villains')
     return render_template('super_hero_lookup.html', supers=super_hero)
+
+def generate_nav():
+    if current_user.is_authenticated:
+        return View('Super Hero Search', 'shapi.search')
+    return None

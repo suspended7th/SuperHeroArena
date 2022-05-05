@@ -1,73 +1,80 @@
-{% extends "base.html" %}
+{%- extends "base.html" %}
 
-{% block head %}
+{% block title %}Super Hero Lookup{% endblock %}
+
+{% block scripts %}
+	{{ super() }}
 	<script src="{{ url_for('static', filename='js/search.js') }}"></script>
-	<title>Super Hero Lookup</title>
 {% endblock %}
 
-{% block body %}
-	<h1>Search for a Super Hero or Super Villain</h1>
-	<p>Search by Exact Name (Super Hero or Real Name), Partial Name, 
-	or by any regex expression you want to use.  If you have a free subscription,
-	the API will only return the first 5 results.</p>
+{% block content %}
+	<div class="content">
+		<div class="jumbotron">
+			<h1>Search for a Super Hero or Super Villain</h1>
+			<p>Search by Exact Name (Super Hero or Real Name), Partial Name, 
+			or by any regex expression you want to use.  If you have a free subscription,
+			the API will only return the first 5 results.</p>
+		</div>
 	
-	{% include "flash.html" %}
+		{% include "flash.html" %}
 	
-	<table>
-		<form action="/supers/" method="GET">
-			<tr>
-				<td>Search Type</td>
-				<td>
-					<select name="type" id="search_type" onchange="ChangeSearchType(this.value);">
-						<option value="name">Name</option>
-						<option value="simple_regex">Partial Name</option>
-						<option value="regex">Regex</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="namerow">
-				<td>Hero/Real Name</td>
-				<td>
-					<input type="text" name="hero" id="hero">
-				</td>
-			</tr>
-			<tr id="simpleregexrow" style="display: none">
-				<td>Partial Hero/Real Name</td>
-				<td>
-					<input type="text" name="simple_regex" id="simpleregex">
-				</td>
-			</tr>
-			<tr id="regexrow" style="display: none">
-				<td>Regex Expression</td>
-				<td>
-					<input type="text" name="regex" id="regex">
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<input type="submit" value="Search">
-				</td>
-			</tr>
-		</form>
-		<tr>
-			<td>
+		<div class="row">
+			<div class="col-md-6">
 				<form action="/supers/" method="GET">
-					<input type="hidden" name="heroes" value="true">
-					<input type="submit" value="20 Random Heroes">
+					<div class="row">
+						<div class="col-md-4">Search Type</div>
+						<div class="col-md-8">
+							<select name="type" id="search_type" onchange="ChangeSearchType(this.value);">
+								<option value="name">Name</option>
+								<option value="simple_regex">Partial Name</option>
+								<option value="regex">Regex</option>
+							</select>
+						</div>
+					</div>
+					<div class="row" id="namerow">
+						<div class="col-md-4">Hero/Real Name</div>
+						<div class="col-md-8">
+							<input type="text" name="hero" id="hero">
+						</div>
+					</div>
+					<div class="row" id="simpleregexrow" style="display: none">
+						<div class="col-md-4">Partial Hero/Real Name</div>
+						<div class="col-md-8">
+							<input type="text" name="simple_regex" id="simpleregex">
+						</div>
+					</div>
+					<div class="row" id="regexrow" style="display: none">
+						<div class="col-md-4">Regex Expression</div>
+						<div class="col-md-8">
+							<input type="text" name="regex" id="regex">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<input type="submit" value="Search">
+						</div>
+					</div>
 				</form>
-			</td>
-			<td>
-				<form action="/supers/" method="GET">
-					<input type="hidden" name="villains" value="true">
-					<input type="submit" value="20 Random Villains">
-				</form>
-			</td>
-		</tr>
-	</table>
-	
-	{% for super in supers %}
-		{% include "super.html" %}
-		<br>
-	{% endfor %}
-{% endblock %}
+				<div class="row">
+					<div class="col-md-6">
+						<form action="/supers/" method="GET">
+							<input type="hidden" name="heroes" value="true">
+							<input type="submit" value="20 Random Heroes">
+						</form>
+					</div>
+					<div class="col-md-6">
+						<form action="/supers/" method="GET">
+							<input type="hidden" name="villains" value="true">
+							<input type="submit" value="20 Random Villains">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		{% for super in supers %}
+			{% include "super.html" %}
+			<br>
+		{% endfor %}
+	</div>
+{%- endblock %}
