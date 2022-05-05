@@ -3,6 +3,9 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
        
 db = SQLAlchemy()
 
@@ -38,9 +41,10 @@ def create_app(test_config=None):
     def load_user(user_id):
         return User.query.get(int(user_id))
     
-    from .views import auth
+    from .views import auth, superHeroApi
     
     app.register_blueprint(auth.bp)
+    app.register_blueprint(superHeroApi.bp)
     
     return app
 

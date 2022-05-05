@@ -8,6 +8,8 @@ setup(
         'flask',
         'flask_sqlalchemy',
         'passlib',
-        'flask_login'
+        'flask_login',
+        'requests',
+        'python-dotenv'
     ],
 )
