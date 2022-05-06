@@ -1,8 +1,9 @@
-from ..dbconfig import get_db
 from datetime import datetime
+from flask_login import UserMixin
 from passlib.hash import bcrypt
 from sqlalchemy.exc import IntegrityError
-from flask_login import UserMixin
+
+from ..dbconfig import get_db
 
 hasher = bcrypt.using(rounds=12)
 

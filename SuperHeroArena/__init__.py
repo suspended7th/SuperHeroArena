@@ -1,11 +1,11 @@
+from dotenv import load_dotenv
 from flask import Flask
 from flask_bootstrap import Bootstrap
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from flask_nav.elements import Navbar, View, Subgroup
-from datetime import datetime
+
 import os
-from dotenv import load_dotenv
+
 from .nav import nav
 
 load_dotenv()

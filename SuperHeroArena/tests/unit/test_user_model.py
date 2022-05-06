@@ -1,10 +1,11 @@
+from datetime import datetime
+from sqlalchemy.exc import IntegrityError
+
 import pytest
+import re
 
 from SuperHeroArena.models.user import User
 from SuperHeroArena import dbconfig
-from sqlalchemy.exc import IntegrityError
-from datetime import datetime
-import re
 
 # Ensure that the database is clean after each test
 @pytest.fixture()

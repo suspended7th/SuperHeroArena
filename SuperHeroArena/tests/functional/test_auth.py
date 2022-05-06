@@ -1,5 +1,5 @@
 import pytest
-from flask_login import current_user
+
 from SuperHeroArena import dbconfig
 from SuperHeroArena.models.user import User
 

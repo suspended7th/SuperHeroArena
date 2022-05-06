@@ -1,6 +1,7 @@
+import pytest, re
+
 from SuperHeroArena import dbconfig
 from SuperHeroArena.models.user import User
-import pytest, re
 
 @pytest.fixture()
 def app(app_setup):

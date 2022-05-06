@@ -1,8 +1,9 @@
+from flask_sqlalchemy import SQLAlchemy
+
 import os
+import pytest
 import tempfile
 
-import pytest
-from flask_sqlalchemy import SQLAlchemy
 import SuperHeroArena
 
 # Fixture to set up the app and database for use in all tests.  
