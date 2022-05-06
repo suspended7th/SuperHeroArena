@@ -9,6 +9,7 @@ def app(app_setup):
     yield app_setup
     dbconfig.db.session.rollback()
     User.query.delete()
+    dbconfig.db.session.commit()
 
 def test_new_user_endpoints(app, client):
     db = dbconfig.get_db()

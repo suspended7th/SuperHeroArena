@@ -12,14 +12,14 @@ bp = Blueprint('shapi', __name__, url_prefix='/supers')
 def search():
     super_hero = {}
     if 'type' in request.args:
-        type = request.args.get('type')
+        request_type = request.args.get('type')
         data = {}
         error = ''
-        if type == 'name':
+        if request_type == 'name':
             data = {'hero': request.args.get('hero')}
-        elif type == 'regex':
+        elif request_type == 'regex':
             data = {'regex': request.args.get('regex')}
-        elif type == 'simple_regex':
+        elif request_type == 'simple_regex':
             regex = '.*'
             name = request.args.get('simple_regex')
             for letter in name:
@@ -31,10 +31,10 @@ def search():
             flash(error)
         if not error:
             super_hero = call_superhero_api(data)
-            if type(super_hero) != dict or type(super_hero) != list:
+            if type(super_hero) is str:
                 flash(super_hero)
                 super_hero = {}
-            elif type == 'name':
+            elif request_type == 'name':
                 super_hero = [super_hero]
     else:
         if 'heroes' in request.args:
