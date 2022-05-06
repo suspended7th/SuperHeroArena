@@ -31,6 +31,7 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
+        remember = False if 'remember' not in request.form else True
         error = None
         if not username:
             error = 'Username is required'
@@ -46,7 +47,7 @@ def signup():
             try:
                 db.session.add(user)
                 db.session.commit()
-                login_user(user)
+                login_user(user, remember=remember)
                 flash('user created')
                 return redirect('/profile/')
             except:
@@ -56,7 +57,7 @@ def signup():
             
     return render_template('signup.html')
 
-@bp.route('/logout/', methods=['POST'])
+@bp.route('/logout/', methods=['GET'])
 @login_required
 def logout():
     logout_user()
@@ -90,10 +91,12 @@ def profile():
 
 def generate_nav():
     nav = Subgroup(
-        'User',
-        View('Login', 'auth.login'),
-        View('Sign Up', 'auth.signup')
+        'User'
     )
     if current_user.is_authenticated:
         nav.items.append(View('Profile', 'auth.profile'))
+        nav.items.append(View('Logout', 'auth.logout'))
+    else:
+        nav.items.append(View('Login', 'auth.login'))
+        nav.items.append(View('Sign Up', 'auth.signup'))
     return nav

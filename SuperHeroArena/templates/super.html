@@ -1,155 +1,146 @@
-<table>
-	<tr>
-		<td><img src="{{ super.images.lg }}" alt="{{ super.name }}"></td>
-		<td>
-			<table>
-				<tr>
-					<th>Hero/Villain Name</th>
-					<td>{{ super.name }}</td>
-				</tr>
-				<tr>
-					<th>Full Real Name</th>
-					<td>{{ super.biography.fullName }}</td>
-				</tr>
-				{% for alias in super.biography.aliases %}
-					<tr>
-						{% if loop.index == 1 %}
-							<th>Aliases</th>
-						{% else %}
-							<td></td>
-						{% endif %}
-						<td>{{  alias }}</td>
-					</tr>
-				{% endfor %}
-				{% for ego in super.biography.alterEgos %}
-					<tr>
-						{% if loop.index == 1 %}
-							<th>Alter Egos</th>
-						{% else %}
-							<td></td>
-						{% endif %}
-						<td>{{ ego }}</td>
-					</tr>
-				{% endfor %}
-				<tr>
-					<th>Place of Birth</th>
-					<td>{{ super.biography.placeOfBirth }}</td>
-				</tr>
-				{% for occupation in super.work.occupation %}
-					<tr>
-						{% if loop.index == 1 %}
-							<th>Occupations</th>
-						{% else %}
-							<td></td>
-						{% endif %}
-						<td>{{ occupation }}</td>
-					</tr>
-				{% endfor %}
-				{% for base in super.work.base %}
-					<tr>
-						{% if loop.index == 1 %}
-							<th>Bases of Operation</th>
-						{% else %}
-							<td></td>
-						{% endif %}
-						<td>{{ base }}</td>
-					</tr>
-				{% endfor %}
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<th>Alignment</th>
-					<td>{{ super.biography.alignment }}</td>
-				</tr>
-				{% for affiliation in super.connections.groupAffiliation %}
-					<tr>
-						{% if loop.index == 1 %}
-							<th>Group Affiliations</th>
-						{% else %}
-							<td></td>
-						{% endif %}
-						<td>{{ affiliation }}</td>
-					</tr>
-				{% endfor %}
-				<tr>
-					<th>Super Hero Arena Stats</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>Intelligence</th>
-					<td>{{ super.powerstats.intelligence }}</td>
-				</tr>
-				<tr>
-					<th>Strength</th>
-					<td>{{ super.powerstats.strength }}</td>
-				</tr>
-				<tr>
-					<th>Speed</th>
-					<td>{{ super.powerstats.speed }}</td>
-				</tr>
-				<tr>
-					<th>Durability</th>
-					<td>{{ super.powerstats.durability }}</td>
-				</tr>
-				<tr>
-					<th>Power</th>
-					<td>{{ super.powerstats.power }}</td>
-				</tr>
-				<tr>
-					<th>Combat</th>
-					<td>{{ super.powerstats.combat }}</td>
-				</tr>
-			</table>
-		</td>
-		<td>
-			<table>
-				<tr>
-					<th>First Appearance</th>
-					<td>{{ super.biography.firstAppearance }}</td>
-				</tr>
-				<tr>
-					<th>Publisher</th>
-					<td>{{ super.biography.publisher }}</td>
-				</tr>
-				{% for relative in super.connections.relatives %}
-					<tr>
-						{% if loop.index == 1 %}
-							<th>Relatives</th>
-						{% else %}
-							<td></td>
-						{% endif %}
-						<td>{{ relative }}</td>
-					</tr>
-				{% endfor %}
-				<tr>
-					<th>Gender</th>
-					<td>{{ super.appearance.gender }}</td>
-				</tr>
-				<tr>
-					<th>Race</th>
-					<td>{{ super.appearance.race }}</td>
-				</tr>
-				<tr>
-					<th>Height</th>
-					<td>{{ super.appearance.height[0] }} ({{ super.appearance.height[1] }})</td>
-				</tr>
-				<tr>
-					<th>Weight</th>
-					<td>{{ super.appearance.weight[0] }} ({{ super.appearance.weight[1] }})</td>
-				</tr>
-				<tr>
-					<th>Eye Color</th>
-					<td>{{ super.appearance.eyeColor }}</td>
-				</tr>
-				<tr>
-					<th>Hair Color</th>
-					<td>{{ super.appearance.hairColor }}</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+<div class="row">
+	<div class="col-md-6"><img src="{{ super.images.lg }}" alt="{{ super.name }}"></div>
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-3"><strong>Hero/Villain Name</strong></div>
+			<div class="col-md-9">{{ super.name }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Full Real Name</strong></div>
+			<div class="col-md-9">{{ super.biography.fullName }}</div>
+		</div>
+		{% for alias in super.biography.aliases %}
+			<div class="row">
+				{% if loop.index == 1 %}
+					<div class="col-md-3"><strong>Aliases</strong></div>
+				{% else %}
+					<div class="col-md-3"></div>
+				{% endif %}
+				<div class="col-md-9">{{  alias }}</div>
+			</div>
+		{% endfor %}
+		{% for ego in super.biography.alterEgos %}
+			<div class="row">
+				{% if loop.index == 1 %}
+					<div class="col-md-3"><strong>Alter Egos</strong></div>
+				{% else %}
+					<div class="col-md-3"></div>
+				{% endif %}
+				<div class="col-md-9">{{ ego }}</div>
+			</div>
+		{% endfor %}
+		<div class="row">
+			<div class="col-md-3"><strong>Place of Birth</strong></div>
+			<div class="col-md-9">{{ super.biography.placeOfBirth }}</div>
+		</div>
+		{% for occupation in super.work.occupation %}
+			<div class="row">
+				{% if loop.index == 1 %}
+					<div class="col-md-3"><strong>Occupations</strong></div>
+				{% else %}
+					<div class="col-md-3"></div>
+				{% endif %}
+				<div class="col-md-9">{{ occupation }}</div>
+			</div>
+		{% endfor %}
+		{% for base in super.work.base %}
+			<div class="row">
+				{% if loop.index == 1 %}
+					<div class="col-md-3"><strong>Bases of Operation</strong></div>
+				{% else %}
+					<div class="col-md-3"></div>
+				{% endif %}
+				<div class="col-md-9">{{ base }}</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-3"><strong>Alignment</strong></div>
+			<div class="col-md-9">{{ super.biography.alignment }}</div>
+		</div>
+		{% for affiliation in super.connections.groupAffiliation %}
+			<div class="row">
+				{% if loop.index == 1 %}
+					<div class="col-md-3"><strong>Group Affiliations</strong></div>
+				{% else %}
+					<div class="col-md-3"></div>
+				{% endif %}
+				<div class="col-md-9">{{ affiliation }}</div>
+			</div>
+		{% endfor %}
+		<div class="row">
+			<div class="col-md-12 text-centered"><strong>Super Hero Arena Stats</strong></div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Intelligence</strong></div>
+			<div class="col-md-9">{{ super.powerstats.intelligence }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Strength</strong></div>
+			<div class="col-md-9">{{ super.powerstats.strength }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Speed</strong></div>
+			<div class="col-md-9">{{ super.powerstats.speed }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Durability</strong></div>
+			<div class="col-md-9">{{ super.powerstats.durability }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Power</strong></div>
+			<div class="col-md-9">{{ super.powerstats.power }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Combat</strong></div>
+			<div class="col-md-9">{{ super.powerstats.combat }}</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-3"><strong>First Appearance</strong></div>
+			<div class="col-md-9">{{ super.biography.firstAppearance }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Publisher</strong></div>
+			<div class="col-md-9">{{ super.biography.publisher }}</div>
+		</div>
+		{% for relative in super.connections.relatives %}
+			<div class="row">
+				{% if loop.index == 1 %}
+					<div class="col-md-3"><strong>Relatives</strong></div>
+				{% else %}
+					<div class="col-md-3"></div>
+				{% endif %}
+				<div class="col-md-9">{{ relative }}</div>
+			</div>
+		{% endfor %}
+		<div class="row">
+			<div class="col-md-3"><strong>Gender</strong></div>
+			<div class="col-md-9">{{ super.appearance.gender }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Race</strong></div>
+			<div class="col-md-9">{{ super.appearance.race }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Height</strong></div>
+			<div class="col-md-9">{{ super.appearance.height[0] }} ({{ super.appearance.height[1] }})</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Weight</strong></div>
+			<div class="col-md-9">{{ super.appearance.weight[0] }} ({{ super.appearance.weight[1] }})</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Eye Color</strong></div>
+			<div class="col-md-9">{{ super.appearance.eyeColor }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>Hair Color</strong></div>
+			<div class="col-md-">{{ super.appearance.hairColor }}</div>
+		</div>
+	</div>
+</div>

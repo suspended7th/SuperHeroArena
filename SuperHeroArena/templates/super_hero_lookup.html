@@ -8,9 +8,9 @@
 {% endblock %}
 
 {% block content %}
-	<div class="content">
+	<div class="content container">
 		<div class="jumbotron">
-			<h1>Search for a Super Hero or Super Villain</h1>
+			<h1>Search for a Super Hero or Villain</h1>
 			<p>Search by Exact Name (Super Hero or Real Name), Partial Name, 
 			or by any regex expression you want to use.  If you have a free subscription,
 			the API will only return the first 5 results.</p>
@@ -19,12 +19,12 @@
 		{% include "flash.html" %}
 	
 		<div class="row">
-			<div class="col-md-6">
-				<form action="/supers/" method="GET">
+			<div class="col-md-12">
+				<form action="/supers/" method="GET" class="form-horizontal">
 					<div class="row">
-						<div class="col-md-4">Search Type</div>
-						<div class="col-md-8">
-							<select name="type" id="search_type" onchange="ChangeSearchType(this.value);">
+						<label for="type" class="col-md-2 control-label">Search Type</label>
+						<div class="col-md-10">
+							<select name="type" id="search_type" onchange="ChangeSearchType(this.value);" class="form-control">
 								<option value="name">Name</option>
 								<option value="simple_regex">Partial Name</option>
 								<option value="regex">Regex</option>
@@ -32,26 +32,26 @@
 						</div>
 					</div>
 					<div class="row" id="namerow">
-						<div class="col-md-4">Hero/Real Name</div>
-						<div class="col-md-8">
-							<input type="text" name="hero" id="hero">
+						<label for="hero" class="col-md-2 control-label">Hero/Real Name</label>
+						<div class="col-md-10">
+							<input type="text" name="hero" id="hero" class="form-control">
 						</div>
 					</div>
 					<div class="row" id="simpleregexrow" style="display: none">
-						<div class="col-md-4">Partial Hero/Real Name</div>
-						<div class="col-md-8">
-							<input type="text" name="simple_regex" id="simpleregex">
+						<label for="simple_regex" class="col-md-2 control-label">Partial Hero/Real Name</label>
+						<div class="col-md-10">
+							<input type="text" name="simple_regex" id="simpleregex" class="form-control">
 						</div>
 					</div>
 					<div class="row" id="regexrow" style="display: none">
-						<div class="col-md-4">Regex Expression</div>
-						<div class="col-md-8">
-							<input type="text" name="regex" id="regex">
+						<label for="regex" class="col-md-2 control-label">Regex Expression</label>
+						<div class="col-md-10">
+							<input type="text" name="regex" id="regex" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<input type="submit" value="Search">
+							<input type="submit" value="Search" class="btn btn-primary btn-block">
 						</div>
 					</div>
 				</form>
@@ -59,13 +59,13 @@
 					<div class="col-md-6">
 						<form action="/supers/" method="GET">
 							<input type="hidden" name="heroes" value="true">
-							<input type="submit" value="20 Random Heroes">
+							<input type="submit" value="20 Random Heroes" class="btn btn-success btn-block">
 						</form>
 					</div>
 					<div class="col-md-6">
 						<form action="/supers/" method="GET">
 							<input type="hidden" name="villains" value="true">
-							<input type="submit" value="20 Random Villains">
+							<input type="submit" value="20 Random Villains" class="btn btn-danger btn-block">
 						</form>
 					</div>
 				</div>
@@ -73,8 +73,8 @@
 		</div>
 		
 		{% for super in supers %}
+			<hr>
 			{% include "super.html" %}
-			<br>
 		{% endfor %}
 	</div>
 {%- endblock %}

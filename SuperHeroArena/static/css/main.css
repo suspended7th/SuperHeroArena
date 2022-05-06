@@ -1,3 +1,14 @@
-body {
-	font-family: sans-serif;
+.btn, .row {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+hr {
+	border-top: 2px solid black;
+}
+
+@-moz-document url-prefix() {
+    fieldset {
+        display: table-cell;
+    }
 }

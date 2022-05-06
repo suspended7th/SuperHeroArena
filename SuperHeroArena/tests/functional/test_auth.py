@@ -14,7 +14,7 @@ def test_new_user_endpoints(app, client):
     db = dbconfig.get_db()
     
     # Test that the endpoint functions properly
-    response = client.post('/logout/')
+    response = client.get('/logout/')
     assert response.status_code == 302
     assert '/login' in response.headers['Location']
     assert client.get('/login/').status_code == 200
@@ -79,7 +79,7 @@ def test_new_user_endpoints(app, client):
     assert 'up@test.com' in data
     
     # Test that the password was not changed
-    response = client.post('/logout/')
+    response = client.get('/logout/')
     assert response.status_code == 302
     assert response.headers['Location'] == '/login/'
     
@@ -113,7 +113,7 @@ def test_new_user_endpoints(app, client):
     assert 'upd@test.com' in data
     
     # Test that the password was changed
-    response = client.post('/logout/')
+    response = client.get('/logout/')
     assert response.status_code == 302
     assert response.headers['Location'] == '/login/'
     
@@ -148,7 +148,7 @@ def test_new_user_endpoints(app, client):
     assert 'Invalid Old Password.  User Not Updated.' in data
     
     # Test bad user credentials
-    client.post('/logout/')
+    client.get('/logout/')
     response = client.post(
         '/login/',
         data = {
@@ -159,7 +159,7 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     assert 'User does not exist.  Please Create one.' in str(response.data)
     
-    client.post('/logout/')
+    client.get('/logout/')
     response = client.post(
         '/login/',
         data = {
