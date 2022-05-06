@@ -1,9 +1,7 @@
-{% with messages = get_flashed_messages() %}
+{% import "bootstrap/utils.html" as utils %}
+
+{% with messages = get_flashed_messages(with_categories=True) %}
 	{% if messages %}
-		<ul class=flashes>
-			{% for message in messages %}
-				<li>{{ message }}
-			{% endfor %}
-		</ul>
+		{{ utils.flashed_messages(messages) }}
 	{% endif %}
 {% endwith %}

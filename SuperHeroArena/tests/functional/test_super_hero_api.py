@@ -20,8 +20,8 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 20
-    assert len(re.findall(r'<td>bad</td>', data)) == 0
-    assert len(re.findall(r'<td>good</td>', data)) == 20
+    assert len(re.findall(r'<div class="col-md-9">bad</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">good</div>', data)) == 20
     
     # Test that a 10 random villains can be retrieved
     response = client.get(
@@ -33,8 +33,8 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 20
-    assert len(re.findall(r'<td>bad</td>', data)) == 20
-    assert len(re.findall(r'<td>good</td>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">bad</div>', data)) == 20
+    assert len(re.findall(r'<div class="col-md-9">good</div>', data)) == 0
     
     # Test that a super can be retrieved by name
     response = client.get(
@@ -49,9 +49,9 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 1
-    assert len(re.findall(r'<td>Spider-Man</td>', data)) == 1
-    assert len(re.findall(r'<td>Superman</td>', data)) == 0
-    assert len(re.findall(r'<td>Black Knight III</td>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Spider-Man</div>', data)) == 1
+    assert len(re.findall(r'<div class="col-md-9">Superman</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Black Knight III</div>', data)) == 0
     assert 'Hero Not Found' not in data
     
     # Test that a super can be retrieved by partial name
@@ -67,9 +67,9 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 5
-    assert len(re.findall(r'<td>Spider-Man</td>', data)) == 0
-    assert len(re.findall(r'<td>Superman</td>', data)) >= 1
-    assert len(re.findall(r'<td>Black Knight III</td>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Spider-Man</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Superman</div>', data)) >= 1
+    assert len(re.findall(r'<div class="col-md-9">Black Knight III</div>', data)) == 0
     assert 'Hero Not Found' not in data
     
     # Test that a super can be retrieved by regex
@@ -85,9 +85,9 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 5
-    assert len(re.findall(r'<td>Spider-Man</td>', data)) == 0
-    assert len(re.findall(r'<td>Superman</td>', data)) == 0
-    assert len(re.findall(r'<td>Black Knight III</td>', data)) >= 1
+    assert len(re.findall(r'<div class="col-md-9">Spider-Man</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Superman</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Black Knight III</div>', data)) >= 1
     assert 'Hero Not Found' not in data
     
     #Test that the api properly handles no results
@@ -103,9 +103,9 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 0
-    assert len(re.findall(r'<td>Spider-Man</td>', data)) == 0
-    assert len(re.findall(r'<td>Superman</td>', data)) == 0
-    assert len(re.findall(r'<td>Black Knight III</td>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Spider-Man</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Superman</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Black Knight III</div>', data)) == 0
     assert 'Hero Not Found' in data
     
     #Test that the api properly handles the type being wrong
@@ -121,7 +121,7 @@ def test_new_user_endpoints(app, client):
     assert response.status_code == 200
     data = str(response.data)
     assert len(re.findall(r'<img\s', data)) == 0
-    assert len(re.findall(r'<td>Spider-Man</td>', data)) == 0
-    assert len(re.findall(r'<td>Superman</td>', data)) == 0
-    assert len(re.findall(r'<td>Black Knight III</td>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Spider-Man</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Superman</div>', data)) == 0
+    assert len(re.findall(r'<div class="col-md-9">Black Knight III</div>', data)) == 0
     assert 'There was an error in parsing which type of query you are trying to make.' in data

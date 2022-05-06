@@ -1,39 +1,52 @@
-{% extends "base.html" %}
+{%- extends "base.html" %}
 
-{% block head %}
-<title>SHA Signup</title>
-{% endblock %}
+{% block title %}SHA Profile{% endblock %}
 
-{% block body %}
-	<h1>{{ user.username }}</h1>
-	
-	{% include "flash.html" %}
-	
-	<form action="/profile/" method="POST">
-		<table>
-			<tr>
-				<td>Username</td>
-				<td><input type="text" name="username" id="username" value="{{ user.username }}"></td>
-			</tr>
-			<tr>
-				<td>Old Password</td>
-				<td><input type="password" name="old_password" id="old_password" value=""></td>
-			</tr>
-			<tr>
-				<td>New Password</td>
-				<td><input type="password" name="new_password" id="new_password" value=""></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td><input type="email" name="email" id="email" value="{{ user.email }}"></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Update"></td>
-			</tr>
-		</table>
-	</form>
-	<form action="/logout/" method="POST">
-		<input type="submit" value="Logout">
-	</form>
+{% block content %}
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class="display">{{ user.username }}</h1>
+		</div>
+			
+		{% include "flash.html" %}
+		
+		<div class="row">
+			<div class=col-md-12>
+				<form action="/profile/" method="POST" class="form-horizontal">
+					<div class="row">
+						<label for="username" class="col-md-2 control-label">Username</label>
+						<div class="form-group col-md-4">
+							<input type="text" name="username" id="username" value="{{ user.username }}" class="form-control">
+						</div>
+						<label for="email" class="col-md-2 control-label">Email</label>
+						<div class="form-group col-md-4">
+							<input type="email" name="email" id="email" value="{{ user.email }}" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<label for="old_password" class="col-md-2 control-label">Old Password</label>
+						<div class="form-group col-md-4">
+							<input type="password" name="old_password" id="old_password" value="" class="form-control">
+						</div>
+						<label for="new_password" class="col-md-2 control-label">New Password</label>
+						<div class="form-group col-md-4">
+							<input type="password" name="new_password" id="new_password" value="" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<input type="submit" value="Update" class="btn btn-primary btn-block">
+						</div>
+					</div>
+				</form>
+				<form action="/logout/" method="GET">
+					<div class="row">
+						<div class="col-md-12">
+							<input type="submit" class="btn btn-danger btn-block" value="Logout">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 {% endblock %}

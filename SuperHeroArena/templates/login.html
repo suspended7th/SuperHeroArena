@@ -1,32 +1,45 @@
-{% extends "base.html" %}
+{%- extends "base.html" %}
 
-{% block head %}
-<title>SHA Login</title>
-{% endblock %}
+{% block title %}SHA Login{% endblock %}
 
-{% block body %}
-	<h1>Login</h1>
-	
-	{% include "flash.html" %}
-	
-	<form action="/login/" method="POST">
-		<table>
-			<tr>
-				<td>Username</td>
-				<td><input type="text" name="username" id="username" value=""></td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td><input type="password" name="password" id="password" value=""></td>
-			</tr>
-			<tr>
-				<td>Remember me</td>
-				<td><input type="checkbox" name="remember"></td>
-			</tr>
-			<tr>
-				<td><a type="button" href="{{ url_for('auth.signup') }}">Sign Up</a></td>
-				<td><input type="submit" value="Login"></td>
-			</tr>
-		</table>
-	</form>
+{% block content %}
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class="display">Login</h1>
+		</div>
+		
+		{% include "flash.html" %}
+		
+		<div class="row">
+			<div class=col-md-12>
+				<form action="/login/" method="POST" class="form-horizontal">
+					<div class="row">
+						<label for="username" class="col-md-2 control-label">Username</label>
+						<div class="form-group col-md-4">
+							<input type="text" name="username" id="username" class="form-control">
+						</div>
+						<label for="password" class="col-md-2 control-label">Password</label> 
+						<div class="form-group col-md-4">
+							<input type="password" name="password" id="password" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6"></div>
+						<label for="remember" class="col-md-2 control-label">Remember me?</label>
+						<div class="form-group col-md-4">
+							<input type="checkbox" name="remember" id="remember" class="form-check-input">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6">
+							<a href="{{ url_for('auth.signup') }}" class="btn btn-info btn-block">Sign Up</a>
+						</div>
+						<div class="form-group col-md-6">
+							<input type="submit" value="Login" class="btn btn-primary btn-block">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 {% endblock %}

@@ -1,9 +1,12 @@
 from flask import Flask
-from flask_login import LoginManager
+from flask_bootstrap import Bootstrap
+from flask_login import LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
+from flask_nav.elements import Navbar, View, Subgroup
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from .nav import nav
 
 load_dotenv()
        
@@ -41,10 +44,19 @@ def create_app(test_config=None):
     def load_user(user_id):
         return User.query.get(int(user_id))
     
-    from .views import auth, superHeroApi
+    Bootstrap(app)
     
+    from .views import auth, superHeroApi, index, nav_builder
+    
+    app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(superHeroApi.bp)
+    
+    app.config['BOOTSTRAP_SERVE_LOCAL'] = True
+    
+    nav.register_element('top_nav', nav_builder.generate_nav)
+    
+    nav.init_app(app)
     
     return app
 
