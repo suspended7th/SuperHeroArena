@@ -1,6 +1,5 @@
-from flask import current_app, g
-from flask.cli import with_appcontext
-from flask_sqlalchemy import SQLAlchemy 
+from flask import current_app
+
 from . import db
 
 import click

@@ -1,7 +1,6 @@
-from flask import abort, Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, logout_user, login_required, current_user
+from flask import Blueprint, render_template, request, flash
+from flask_login import login_required, current_user
 from flask_nav.elements import View
-import json, requests, os, re
 
 from .api import call_superhero_api
 
