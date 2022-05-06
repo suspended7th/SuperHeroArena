@@ -46,11 +46,12 @@ def create_app(test_config=None):
     
     Bootstrap(app)
     
-    from .views import auth, superHeroApi, index, nav_builder
+    from .views import auth, superHeroApi, index, battle, nav_builder
     
     app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(superHeroApi.bp)
+    app.register_blueprint(battle.bp)
     
     app.config['BOOTSTRAP_SERVE_LOCAL'] = True
     

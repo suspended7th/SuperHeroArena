@@ -1,10 +1,29 @@
+from SuperHeroArena import dbconfig
+from SuperHeroArena.models.user import User
 import pytest, re
 
 @pytest.fixture()
 def app(app_setup):
     yield app_setup
+    dbconfig.db.session.rollback()
+    User.query.delete()
+    dbconfig.db.session.commit()
 
 def test_new_user_endpoints(app, client):
+    # login to access these endpoints
+    response = client.post(
+        '/signup/',
+        data = {
+            'username': 'functional',
+            'password': 'functional',
+            'email': 'func@test.com'
+        }
+    )
+    assert response.status_code == 302
+    data = str(client.get(response.headers['Location']).data)
+    assert 'functional' in data
+    assert 'func@test.com' in data
+    
     # Test that the endpoint functions properly
     response = client.get('/supers/')
     assert response.status_code == 200

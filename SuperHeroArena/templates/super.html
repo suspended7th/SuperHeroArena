@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-6"><img src="{{ super.images.lg }}" alt="{{ super.name }}"></div>
+	<div class="col-md-6"><img src="{{ super.images.lg }}" alt="No Image Found for: {{ super.name }}"></div>
 	<div class="col-md-6">
 		<div class="row">
 			<div class="col-md-3"><strong>Hero/Villain Name</strong></div>
@@ -72,7 +72,7 @@
 			</div>
 		{% endfor %}
 		<div class="row">
-			<div class="col-md-12 text-centered"><strong>Super Hero Arena Stats</strong></div>
+			<div class="col-md-12 text-center"><strong>Super Hero Arena Stats</strong></div>
 		</div>
 		<div class="row">
 			<div class="col-md-3"><strong>Intelligence</strong></div>
@@ -97,6 +97,14 @@
 		<div class="row">
 			<div class="col-md-3"><strong>Combat</strong></div>
 			<div class="col-md-9">{{ super.powerstats.combat }}</div>
+		</div>
+		<div class="row">
+			<div class=col-md-12">
+				<form action="/battle/", method="POST">
+					<input type="hidden" name="hero" value="{{ super.name }}">
+					<input type="submit" class="btn btn-primary btn-block" value="BATTLE!">
+				</form>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-6">
