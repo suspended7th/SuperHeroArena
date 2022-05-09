@@ -11,9 +11,12 @@ def call_superhero_api(data, suburl=''):
     response = requests.get(superHeroAPIURL + suburl, headers=superHeroAPIHeaders, params=data)
     print(response)
     super_hero_text = response.text
+    print(super_hero_text)
     if not re.match(r'^[\{\[]', super_hero_text):
-        return super_hero_text
+        return str(response.status_code) + ': ' + super_hero_text
     super_hero = json.loads(super_hero_text)
+    if 'message' in super_hero:
+        return str(response.status_code) + ': ' + super_hero['message']
     if type(super_hero) is dict:
         super_hero = reformat_super_hero(super_hero)
     else:

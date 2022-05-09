@@ -14,10 +14,14 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False, unique=True)
     password = db.Column(db.String(), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    high_score = db.Column(db.Integer(), default=0)
+    high_score_hero = db.Column(db.String())
+    high_score_date = db.Column(db.DateTime)
     
-    def __init__(self, username, email, password=None, date_created=None):
-        db.Model.__init__(self, username=username, email=email, date_created=date_created)
+    def __init__(self, username, email, password=None, date_created=None, high_score=0, high_score_hero=None, high_score_date=None):
+        db.Model.__init__(self, username=username, email=email, date_created=date_created, high_score=high_score, 
+                          high_score_hero=high_score_hero, high_score_date=high_score_date)
         self.set_password(password)
         
     def set_password(self, password):

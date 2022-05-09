@@ -15,7 +15,8 @@ def app(app_setup):
     User.query.delete()
 
 def test_new_user(app):
-    user =  User(username='test', password='test', email='test@test.com')
+    user =  User(username='test', password='test', email='test@test.com', high_score=123, 
+                 high_score_hero='test_hero', high_score_date=datetime.utcnow())
     db = dbconfig.get_db()
     
     try:
@@ -30,7 +31,10 @@ def test_new_user(app):
     # test for id 1 because this is a fresh test database
     assert user.id == 1
     assert user.username == 'test'
+    assert user.high_score == 123
+    assert user.high_score_hero == 'test_hero'
     assert user.date_created.date() == datetime.utcnow().date()
+    assert user.high_score_date.date() == datetime.utcnow().date()
     assert user.email == 'test@test.com'
     # check if this matches the bcrypt standard of 60 characters
     # first 7 are version and cost info, remaining 53 are the hash and salt values

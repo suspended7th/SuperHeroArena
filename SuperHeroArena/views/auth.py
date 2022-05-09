@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, render_template, redirect, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_nav.elements import View, Subgroup
@@ -89,6 +90,21 @@ def profile():
             flash("There was an issue updating the user")
 
     return render_template('profile.html', user=current_user)
+
+@bp.route('/update_high_score/', methods=['POST'])
+def update_high_score():
+    db = get_db()
+    score = int(request.form['score'])
+    hero = request.form['hero']
+    if score > current_user.high_score:
+        try:
+            current_user.high_score = score
+            current_user.high_score_hero = hero
+            current_user.high_score_date = datetime.utcnow()
+            db.session.commit()
+        except:
+            flash("There was an issue updating the user")
+    return redirect('/profile/')
 
 def generate_nav():
     nav = Subgroup(

@@ -11,7 +11,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<p class="text-center"><strong>Current Opponent:</strong> {{ enemy.name }}</p>
+				<h1 class="text-center"><strong>Current Opponent:</strong> {{ enemy.name }}</h1>
 				<input type="hidden" class="enemy-intelligence" value="{{ enemy.powerstats.intelligence }}">
 				<input type="hidden" class="enemy-strength" value="{{ enemy.powerstats.strength }}">
 				<input type="hidden" class="enemy-speed" value="{{ enemy.powerstats.speed }}">
@@ -25,9 +25,9 @@
 			<div class="col-md-6">
 				<div class="progress">
 					<div class="progress-bar progress-bar-success progress-bar-player" role="progressbar" 
-						aria-valuenow="300" aria-valuemin="0" aria-valuemax="300" 
-						style="min-width: 2em; display: block; float: right; width: 100%;">
-						<div class="health-percent-player pull-right">100%</div>
+						aria-valuenow="{{ hp }}" aria-valuemin="0" aria-valuemax="300" 
+						style="min-width: 2em; display: block; float: right; width: {{ hp_percent }}%;">
+						<div class="health-percent-player pull-right">{{ hp_percent }}%</div>
 					</div>
 				</div>
 			</div>
@@ -135,7 +135,36 @@
 				</form>
 			</div>
 			<div class="col-md-4">
-				<button class="btn btn-danger attack" disabled="true">ATTACK!</button>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-danger btn-block attack" disabled="true">ATTACK!</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						Current Win Streak: <span id="score_display">{{ score }}</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form action="/update_high_score/", method="POST">
+							<input type="hidden" name="hero" value="{{ player.name }}">
+							<input type="hidden" name="score" id="current_score" value="{{ score }}">
+							<input type="submit" id="quit" class="btn btn-primary btn-block" value="End Game and Record Score">
+						</form>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form action="/battle/", method="POST">
+							<input type="hidden" name="hero" value="{{ player.name }}">
+							<input type="hidden" name="score" id="next_score" value="{{ score + 1 }}">
+							<input type="hidden" name="hp" id="hp" value="">
+							<input type="submit" id="battle_again" style="display:none" 
+								   class="btn btn-primary btn-block" value="Next Battle">
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
