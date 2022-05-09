@@ -198,7 +198,7 @@ window.onload = function() {
 			select_power.disabled = false;
 			select_combat.disabled = false;
 			disabled_checkbox.disabled = true;
-			this.disabled = false;
+			this.disabled = true;
 		} else {
 			select_inteligence.disabled = true;
 			select_strength.disabled = true;
@@ -206,6 +206,14 @@ window.onload = function() {
 			select_durability.disabled = true;
 			select_power.disabled = true;
 			select_combat.disabled = true;
+			let player_hp = player_hp_bar.getAttribute('aria-valuenow');
+			if (player_hp > 0) {
+				let new_score = document.getElementById("next_score").value;
+				document.getElementById("current_score").value = new_score;
+				document.getElementById("score_display").innerHTML = new_score;
+			}
+			document.getElementById("hp").value = player_hp;
+			document.getElementById("battle_again").style.display = "block";
 		}
 	})
 }

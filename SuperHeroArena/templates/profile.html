@@ -34,6 +34,16 @@
 						</div>
 					</div>
 					<div class="row">
+						<label for="high_score" class="col-md-2 control-label">High Score</label>
+						<div class="form-group col-md-4">
+							<input type="text" name="high_score" id="high_score" class="form-control" readonly value="{{ user.high_score }}">
+						</div>
+						<label for="high_score_hero" class="col-md-2 control-label">High Score Hero</label>
+						<div class="form-group col-md-4">
+							<input type="text" name="high_score_hero" id="high_score_hero" class="form-control" readonly value="{{ user.high_score_hero }}">
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12">
 							<input type="submit" value="Update" class="btn btn-primary btn-block">
 						</div>

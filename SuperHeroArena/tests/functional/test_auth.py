@@ -148,6 +148,23 @@ def test_new_user_endpoints(app, client):
     assert 'upd@test.com' in data
     assert 'Invalid Old Password.  User Not Updated.' in data
     
+    # Test Score Updater
+    response = client.post(
+        '/update_high_score/',
+        data = {
+            'score': '123',
+            'hero': 'test_hero'
+        }
+    )
+    
+    assert response.status_code == 302
+    assert response.headers['Location'] == '/profile/'
+    data = str(client.get(response.headers['Location']).data)
+    assert 'updated' in data
+    assert 'upd@test.com' in data
+    assert '123' in data
+    assert 'test_hero' in data
+    
     # Test bad user credentials
     client.get('/logout/')
     response = client.post(

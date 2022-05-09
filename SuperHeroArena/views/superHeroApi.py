@@ -31,15 +31,24 @@ def search():
         if not error:
             super_hero = call_superhero_api(data)
             if type(super_hero) is str:
+                flash("An error has occurred while trying to reach the Super Hero API")
                 flash(super_hero)
-                super_hero = {}
+                return render_template('super_hero_lookup.html', supers=[])
             elif request_type == 'name':
                 super_hero = [super_hero]
     else:
         if 'heroes' in request.args:
             super_hero = call_superhero_api({}, 'heroes')
+            if type(super_hero) is str:
+                flash("An error has occurred while trying to reach the Super Hero API")
+                flash(super_hero)
+                return render_template('super_hero_lookup.html', supers=[])
         elif 'villains' in request.args:
             super_hero = call_superhero_api({}, 'villains')
+            if type(super_hero) is str:
+                flash("An error has occurred while trying to reach the Super Hero API")
+                flash(super_hero)
+                return render_template('super_hero_lookup.html', supers=[])
     return render_template('super_hero_lookup.html', supers=super_hero)
 
 def generate_nav():
